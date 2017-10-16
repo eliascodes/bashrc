@@ -1,5 +1,7 @@
 #!/bin/bash
 
-ln -S .bash_profile ~/.bash_profile
-ln -S .zshrc ~/.zshrc
-ln -S .vim ~/.vim
+BASE=$(pwd)
+
+ln -s $BASE/.bash_profile ~/.bash_profile
+ln -s $BASE/.zshrc ~/.zshrc
+ln -s $BASE/.vim ~/.vim
