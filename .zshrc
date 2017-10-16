@@ -173,6 +173,6 @@ function ggi {
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gitfast git-extras autojump brew npm nvm osx sudo virtualenv virtualenvwrapper)
+plugins=(autojump git-extras git gitfast sudo virtualenv virtualenvwrapper)
 
 source $ZSH/oh-my-zsh.sh
