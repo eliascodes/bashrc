@@ -1,0 +1,5 @@
+#!/bin/bash
+
+ln -S .bash_profile ~/.bash_profile
+ln -S .zshrc ~/.zshrc
+ln -S .vim ~/.vim
