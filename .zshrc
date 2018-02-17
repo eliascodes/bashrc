@@ -36,6 +36,9 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 ####
 #### Custom Config
 ####
+# History
+export HISTSIZE=10000
+export SAVEHIST=10000
 
 # Theme customisation
 PROMPT_GEOMETRY_EXEC_TIME=true
@@ -52,6 +55,8 @@ alias tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^
 alias v='vim'
 alias vrc='vim ~/.vim/vimrc'
 alias vzs='vim ~/.zshrc'
+alias rmrf='rm -rf '
+alias ginspect='~/.gitinspector/gitinspector.py'
 
 mkdirc() {
   mkdir -p $1 && cd $1
@@ -103,10 +108,13 @@ export NVM_DIR="$HOME/.nvm"
 ###
 # Python
 ###
+alias py='python '
 alias pyv='python -m virtualenv '
 alias pyvs='python -m virtualenv --system-site-packages '
 alias pyva='source ./bin/activate'
 alias pyvd='source deactivate'
+alias pi='pip3 install '
+alias pi2='pip install '
 
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 export WORKON_HOME=$HOME/.virtualenvs
