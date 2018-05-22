@@ -53,10 +53,10 @@ alias sz='source ~/.zshrc'
 alias g8='nocorrect g8'
 alias tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
 alias v='vim'
-alias vrc='vim ~/.vim/vimrc'
-alias vzs='vim ~/.zshrc'
+alias vrc='code ~/.vim/vimrc'
+alias zrc='code ~/.zshrc'
 alias rmrf='rm -rf '
-alias ginspect='~/.gitinspector/gitinspector.py'
+alias edit='code .'
 
 mkdirc() {
   mkdir -p $1 && cd $1
