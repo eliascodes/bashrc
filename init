@@ -1,7 +1,9 @@
 #!/bin/bash
 
 BASE=$(pwd)
+PLATFORM=$(uname -s)
+BASHRCNAME=[[ $PLATFORM='Darwin' ]] && 'bash_profile' || 'bashrc'
 
-ln -s $BASE/.bash_profile ~/.bash_profile
+ln -s $BASE/.bash_profile ~/.$BASHRCNAME
 ln -s $BASE/.zshrc ~/.zshrc
 ln -s $BASE/.vim ~/.vim

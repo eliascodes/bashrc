@@ -57,6 +57,7 @@ alias vrc='code ~/.vim/vimrc'
 alias zrc='code ~/.zshrc'
 alias rmrf='rm -rf '
 alias edit='code .'
+alias xsm='exercism'
 
 mkdirc() {
   mkdir -p $1 && cd $1
@@ -101,8 +102,21 @@ alias ni='node --inspect=9292 --debug'
 ###
 # nvm
 ###
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# Defer initialization of nvm until nvm, node or a node-dependent command is
+# run. Ensure this block is only run once if .bashrc gets sourced multiple times
+# by checking whether __init_nvm is a function.
+if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(whence -w __init_nvm)" = function ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+  declare -a __node_commands=('nvm' 'node' 'npm' 'yarn' 'gulp' 'grunt' 'webpack')
+  function __init_nvm() {
+    for i in "${__node_commands[@]}"; do unalias $i; done
+    . "$NVM_DIR"/nvm.sh
+    unset __node_commands
+    unset -f __init_nvm
+  }
+  for i in "${__node_commands[@]}"; do alias $i='__init_nvm && '$i; done
+fi
 
 
 ###
@@ -115,12 +129,21 @@ alias pyva='source ./bin/activate'
 alias pyvd='source deactivate'
 alias pi='pip3 install '
 alias pi2='pip install '
+alias setupvenv='source /usr/local/bin/virtualenvwrapper.sh'
 
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/wk
-source /usr/local/bin/virtualenvwrapper.sh
+# Don't bother initialising virtualenv
+# Do this manually if python is needed
+## source /usr/local/bin/virtualenvwrapper.sh
 
+
+###
+# Rust
+###
+alias cg='cargo'
+alias ru='rustup'
 
 ###
 # PostgreSQL
@@ -129,16 +152,6 @@ export PGDATA="/usr/local/var/postgres/"
 alias psql.start="pg_ctl -l /dev/null start"
 alias psql.stop="pg_ctl stop"
 alias psql.restart="pg_ctl -l /dev/null restart"
-
-
-###
-# MySQL
-###
-export PATH="/usr/local/mysql/bin:${PATH}"
-alias mysql.server="/usr/local/mysql/support-files/mysql.server"
-alias mysql.start="sudo mysql.server start"
-alias mysql.stop="sudo mysql.server stop"
-alias mysql.restart="sudo mysql.server restart"
 
 
 ###
@@ -181,6 +194,6 @@ function ggi {
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(autojump git-extras git gitfast sudo virtualenv virtualenvwrapper)
+plugins=(autojump git-extras git gitfast sudo)
 
 source $ZSH/oh-my-zsh.sh
